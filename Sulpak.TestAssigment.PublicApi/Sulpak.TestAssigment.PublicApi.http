@@ -1,0 +1,6 @@
+@Sulpak.TestAssigment.PublicApi_HostAddress = http://localhost:5174
+
+GET {{Sulpak.TestAssigment.PublicApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

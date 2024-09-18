@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C6852D3-A07E-4068-AFA2-6A8D3F500953}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5D69F743-B770-418C-B3CA-5537F0695C5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A0582681-52F8-4D9B-BCE1-33DA9A756BC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sulpak.TestAssigment.Infrastructure", "Sulpak.TestAssigment.Infrastructure\Sulpak.TestAssigment.Infrastructure.csproj", "{C6DEF5CC-934D-493C-89CA-3C8D8CCD7BA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sulpak.TestAssigment.PublicApi", "Sulpak.TestAssigment.PublicApi\Sulpak.TestAssigment.PublicApi.csproj", "{F42E35EB-93D4-461E-965A-FFA4E4EF5141}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sulpak.TestAssigment.SharedKernel", "Sulpak.TestAssigment.SharedKernel\Sulpak.TestAssigment.SharedKernel.csproj", "{448EF17F-B92F-4056-AB55-9435EF5DC0CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sulpak.TestAssigment.Domain", "Sulpak.TestAssigment.Domain\Sulpak.TestAssigment.Domain.csproj", "{E482DA70-045C-46B1-A3FB-F8F555ACA489}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sulpak.TestAssigment.Application", "Sulpak.TestAssigment.Application\Sulpak.TestAssigment.Application.csproj", "{95043259-CB57-495E-AF41-DE211ED0A8EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A0582681-52F8-4D9B-BCE1-33DA9A756BC0} = {9C6852D3-A07E-4068-AFA2-6A8D3F500953}
+		{C6DEF5CC-934D-493C-89CA-3C8D8CCD7BA4} = {9C6852D3-A07E-4068-AFA2-6A8D3F500953}
+		{F42E35EB-93D4-461E-965A-FFA4E4EF5141} = {9C6852D3-A07E-4068-AFA2-6A8D3F500953}
+		{448EF17F-B92F-4056-AB55-9435EF5DC0CC} = {9C6852D3-A07E-4068-AFA2-6A8D3F500953}
+		{E482DA70-045C-46B1-A3FB-F8F555ACA489} = {A0582681-52F8-4D9B-BCE1-33DA9A756BC0}
+		{95043259-CB57-495E-AF41-DE211ED0A8EC} = {A0582681-52F8-4D9B-BCE1-33DA9A756BC0}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6DEF5CC-934D-493C-89CA-3C8D8CCD7BA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6DEF5CC-934D-493C-89CA-3C8D8CCD7BA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6DEF5CC-934D-493C-89CA-3C8D8CCD7BA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6DEF5CC-934D-493C-89CA-3C8D8CCD7BA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F42E35EB-93D4-461E-965A-FFA4E4EF5141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F42E35EB-93D4-461E-965A-FFA4E4EF5141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F42E35EB-93D4-461E-965A-FFA4E4EF5141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F42E35EB-93D4-461E-965A-FFA4E4EF5141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{448EF17F-B92F-4056-AB55-9435EF5DC0CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{448EF17F-B92F-4056-AB55-9435EF5DC0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{448EF17F-B92F-4056-AB55-9435EF5DC0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{448EF17F-B92F-4056-AB55-9435EF5DC0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E482DA70-045C-46B1-A3FB-F8F555ACA489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E482DA70-045C-46B1-A3FB-F8F555ACA489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E482DA70-045C-46B1-A3FB-F8F555ACA489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E482DA70-045C-46B1-A3FB-F8F555ACA489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95043259-CB57-495E-AF41-DE211ED0A8EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95043259-CB57-495E-AF41-DE211ED0A8EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95043259-CB57-495E-AF41-DE211ED0A8EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95043259-CB57-495E-AF41-DE211ED0A8EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
