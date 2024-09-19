@@ -1,3 +1,4 @@
+using Sulpak.TestAssigment.Infrastructure;
 using Sulpak.TestAssigment.PublicApi;
 using Sulpak.TestAssigment.PublicApi.Middlewares;
 
@@ -8,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.ConfigureVersioning();
 builder.ConfigureSwagger();
+builder.ConfigureServices();
 
 var app = builder.Build();
 
