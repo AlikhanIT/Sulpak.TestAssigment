@@ -12,18 +12,15 @@ public class PriceUseCase
         _priceRepository = priceRepository;
     }
 
-    public async Task<Price?> GetPriceBySkuAndDepartment(string sku, string department)
-    {
-        return await _priceRepository.GetPriceBySkuAndDepartment(sku, department);
-    }
+    public async Task<(IEnumerable<Price> prices, int totalRecords)> GetPricesPagedAsync(int pageNumber, int pageSize)
+        => await _priceRepository.GetPricesPagedAsync(pageNumber, pageSize);
 
-    public async Task<List<Price>> GetPricesByDepartmentAndPriority(string department, int priority)
-    {
-        return await _priceRepository.GetPricesByDepartmentAndPriority(department, priority);
-    }
+    public async Task<Price> GetPriceByArticleAndDepartmentAsync(int article, int departmentId)
+        => await _priceRepository.GetPriceByArticleAndDepartmentAsync(article, departmentId);
 
-    public async Task UpdatePrices(List<Price> prices, int priority)
-    {
-        await _priceRepository.UpdatePrices(prices, priority);
-    }
+    public async Task<List<Price>> GetPricesByDepartmentAndPriorityAsync(int departmentId, int priority)
+        => await _priceRepository.GetPricesByDepartmentAndPriorityAsync(departmentId, priority);
+
+    public async Task UpdatePricesAsync(List<Price> prices, int priority)
+        => await _priceRepository.UpdatePricesAsync(prices, priority);
 }

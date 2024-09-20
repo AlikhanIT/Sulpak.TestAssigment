@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Sulpak.TestAssigment.Application.Interfaces.Repositories;
 using Sulpak.TestAssigment.Application.UseCases;
@@ -10,15 +9,18 @@ namespace Sulpak.TestAssigment.Infrastructure;
 
 public static class ServiceExtension
 {
-    public static void ConfigureServices(this WebApplicationBuilder builder)
+    public static IServiceCollection ConfigureDatabase(this IServiceCollection services)
     {
-        // Подключение к базе данных SQLite
-        builder.Services.AddDbContext<DataContext>(options =>
+        services.AddDbContext<DataContext>(options =>
             options.UseSqlite("Data Source=prices.db"));
 
-        // Другие сервисы
-        builder.Services.AddScoped<IPriceRepository, PriceRepository>();
-        builder.Services.AddScoped<PriceUseCase>();
+        return services;
     }
-
+    
+    public static IServiceCollection ConfigureRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IPriceRepository, PriceRepository>();
+        
+        return services;
+    }
 }

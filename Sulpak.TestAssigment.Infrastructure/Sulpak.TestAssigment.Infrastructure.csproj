@@ -9,6 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Sulpak.TestAssigment.Application\Sulpak.TestAssigment.Application.csproj" />
       <ProjectReference Include="..\Sulpak.TestAssigment.Domain\Sulpak.TestAssigment.Domain.csproj" />
+      <ProjectReference Include="..\Sulpak.TestAssigment.SharedKernel\Sulpak.TestAssigment.SharedKernel.csproj" />
     </ItemGroup>
 
     <ItemGroup>

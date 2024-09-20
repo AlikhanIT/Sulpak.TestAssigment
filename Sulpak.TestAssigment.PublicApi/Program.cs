@@ -9,7 +9,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.ConfigureVersioning();
 builder.ConfigureSwagger();
-builder.ConfigureServices();
+
+//init application layer
+builder.Services.ConfigureUseCases();
+
+//init infrastructure layer
+builder.Services.ConfigureDatabase()
+    .ConfigureRepositories();
 
 var app = builder.Build();
 
