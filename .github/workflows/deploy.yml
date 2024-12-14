@@ -21,13 +21,15 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Остановка и удаление старого контейнера (если он существует)
+            # Переходим в директорию проекта
+            cd ~/myapp-directory
+      
+            # Сборка образа из указанной папки
+            sudo docker build -t myapp ./Sulpak.TestAssigment.PublicApi/
+      
+            # Остановка и удаление старого контейнера
             sudo docker stop myapp-container || true
             sudo docker rm myapp-container || true
-          
-            # Сборка нового образа из Dockerfile
-            sudo docker build -t myapp:latest .
-          
-            # Запуск нового контейнера из собранного образа
-            sudo docker run -d --name myapp-container -p 8080:8080 -p 8081:8081 myapp:latest
-
+      
+            # Запуск нового контейнера
+            sudo docker run -d --name myapp-container -p 8080:8080 -p 8081:8081 myapp
