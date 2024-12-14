@@ -24,7 +24,7 @@ jobs:
 
             # Клонирование текущего репозитория
             echo "Cloning the repository..."
-            git clone https://github.com/AlikhanIT/Sulpak.TestAssigment.git ~/myapp-directory
+            git clone https://github.com/AlikhanIT/Sulpak.TestAssigment.git
 
             # Переход в директорию и проверка Dockerfile
             cd Sulpak.TestAssigment.PublicApi
