@@ -11,27 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone or Update Repository and Build Docker
+      # Шаг 1: Подключение по SSH, клонирование репозитория и сборка
+      - name: Clone Repository and Build Docker
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Создаем директорию, если её нет
-            if [ ! -d "~/myapp-directory" ]; then
-              echo "Cloning the repository for the first time..."
-              git clone https://github.com/${{ github.repository }} ~/myapp-directory
-            else
-              echo "Repository exists. Pulling the latest changes..."
-              cd ~/myapp-directory
-              git fetch --all
-              git checkout test
-              git pull origin test
-            fi
+            # Очистка старой директории
+            rm -rf ~/myapp-directory || true
 
-            # Переход в нужную директорию
-            cd ~/myapp-directory/Sulpak.TestAssigment
+            # Клонирование текущего репозитория
+            echo "Cloning the repository..."
+            git clone https://github.com/AlikhanIT/Sulpak.TestAssigment.git
+
+            # Переход в директорию и проверка Dockerfile
+            cd Sulpak.TestAssigment
 
             # Остановка старого контейнера
             echo "Stopping existing container..."
