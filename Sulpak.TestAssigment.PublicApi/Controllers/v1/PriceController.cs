@@ -36,7 +36,7 @@ public class PriceController : ControllerBase
     }
 
     /// <summary>
-    /// Обновление цен с определенным приоритетом v2
+    /// Обновление цен с определенным приоритетом v2(it is work)
     /// </summary>
     /// <param name="prices"></param>
     /// <param name="priority"></param>
