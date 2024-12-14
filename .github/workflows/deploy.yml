@@ -11,57 +11,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Шаг 1: Клонирование репозитория
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      # Шаг 2: Очистка и обновление директории на сервере
-      - name: Clean Target Directory on Server
+      # Шаг 1: Подключение по SSH, клонирование репозитория и сборка
+      - name: Clone Repository and Build Docker
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "Cleaning ~/myapp-directory"
+            # Очистка старой директории
             rm -rf ~/myapp-directory || true
-            mkdir -p ~/myapp-directory
 
-      # Шаг 3: Копирование свежего кода на сервер
-      - name: Copy Files to Server
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./"
-          target: "~/myapp-directory"
-          strip-components: 0
+            # Клонирование текущего репозитория
+            echo "Cloning the repository..."
+            git clone https://github.com/${{ github.repository }} ~/myapp-directory
 
-      # Шаг 4: Сборка и деплой в Docker
-      - name: Build and Deploy with Docker
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
+            # Переход в директорию и проверка Dockerfile
             cd ~/myapp-directory/Sulpak.TestAssigment.PublicApi
 
-            # Проверка наличия Dockerfile
             if [ ! -f Dockerfile ]; then
               echo "Error: Dockerfile not found!"
               exit 1
             fi
 
-            echo "Stopping and removing existing container..."
+            # Остановка старого контейнера
+            echo "Stopping existing container..."
             sudo docker stop myapp-container || true
             sudo docker rm myapp-container || true
 
+            # Сборка и запуск нового контейнера
             echo "Building Docker image..."
             sudo docker build -t myapp .
 
-            echo "Running new container..."
+            echo "Running the new container..."
             sudo docker run -d --name myapp-container -p 8080:8080 -p 8081:8081 myapp
 
             echo "Deployment completed successfully!"
