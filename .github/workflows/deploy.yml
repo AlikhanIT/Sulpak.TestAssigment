@@ -13,15 +13,14 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      
-      # Добавление SSH-агента и разблокировка ключа с паролем
-      - name: Setup SSH Agent
-        uses: webfactory/ssh-agent@v0.5.4
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-      
-      # Подключение к серверу и выполнение команд
+
+      - name: Start SSH Agent and Add Key
+        run: |
+          eval "$(ssh-agent -s)"
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+          ssh-add key.pem <<< "${{ secrets.SSH_PASSPHRASE }}"
+
       - name: SSH to Server and Deploy
         uses: appleboy/ssh-action@master
         with:
