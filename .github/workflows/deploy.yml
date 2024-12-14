@@ -27,7 +27,7 @@ jobs:
             git clone https://github.com/AlikhanIT/Sulpak.TestAssigment.git ~/myapp-directory
 
             # Переход в директорию и проверка Dockerfile
-            cd /Sulpak.TestAssigment.PublicApi
+            cd Sulpak.TestAssigment.PublicApi
 
             # Остановка старого контейнера
             echo "Stopping existing container..."
