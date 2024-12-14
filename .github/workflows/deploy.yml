@@ -27,7 +27,7 @@ jobs:
             git clone https://github.com/${{ github.repository }}
 
             # Переход в директорию и проверка Dockerfile
-            cd Sulpak.TestAssigment.PublicApi
+            cd Sulpak.TestAssigment
 
             # Остановка старого контейнера
             echo "Stopping existing container..."
