@@ -22,8 +22,9 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./"  # Копируем все файлы из репозитория
-          target: "~/myapp-directory"  # Директория на сервере
+          source: "./"  # Передаём все файлы из текущей директории
+          target: "~/myapp-directory"  # Путь на сервере, куда скопировать файлы
+          strip-components: 0  # Сохраняем структуру папок
 
       # Шаг 3: Подключение к серверу и деплой
       - name: SSH to Server and Deploy
