@@ -22,35 +22,45 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "./"  # Передаём все файлы из текущей директории
-          target: "~/myapp-directory"  # Путь на сервере, куда скопировать файлы
-          strip-components: 0  # Сохраняем структуру папок
+          source: "./"   # Передаём все файлы из репозитория
+          target: "~/myapp-directory" # Куда копировать файлы на сервер
+          strip-components: 0
 
-      # Шаг 3: Подключение к серверу и деплой
-      - name: SSH to Server and Deploy
+      # Шаг 3: Проверка содержимого директории на сервере
+      - name: Check Files on Server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Переходим в директорию, куда скопировали файлы
+            echo "### Проверка директории ~/myapp-directory ###"
+            ls -R ~/myapp-directory
+
+      # Шаг 4: Подключение и сборка образа
+      - name: Build and Deploy on Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Переход в директорию
             cd ~/myapp-directory
 
-            # Проверяем наличие Dockerfile
+            # Проверка наличия Dockerfile
             if [ ! -f ./Sulpak.TestAssigment.PublicApi/Dockerfile ]; then
               echo "Error: Dockerfile not found in Sulpak.TestAssigment.PublicApi!"
               exit 1
             fi
 
-            # Останавливаем и удаляем старый контейнер
+            # Остановка и удаление старого контейнера
             sudo docker stop myapp-container || true
             sudo docker rm myapp-container || true
 
-            # Собираем новый Docker-образ
+            # Сборка Docker-образа
             sudo docker build -t myapp ./Sulpak.TestAssigment.PublicApi/
 
-            # Запускаем новый контейнер
+            # Запуск нового контейнера
             sudo docker run -d --name myapp-container -p 8080:8080 -p 8081:8081 myapp
-
             echo "Deployment completed successfully!"
