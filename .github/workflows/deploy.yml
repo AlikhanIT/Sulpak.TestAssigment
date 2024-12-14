@@ -27,12 +27,7 @@ jobs:
             git clone https://github.com/${{ github.repository }} ~/myapp-directory
 
             # Переход в директорию и проверка Dockerfile
-            cd ~/myapp-directory/Sulpak.TestAssigment.PublicApi
-
-            if [ ! -f Dockerfile ]; then
-              echo "Error: Dockerfile not found!"
-              exit 1
-            fi
+            cd /Sulpak.TestAssigment.PublicApi
 
             # Остановка старого контейнера
             echo "Stopping existing container..."
