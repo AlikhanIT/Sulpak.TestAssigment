@@ -11,9 +11,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Шаг 1: Клонирование репозитория
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # Шаг 2: Копирование файлов на сервер
+      - name: Copy Files to Server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "./"  # Копируем все файлы из репозитория
+          target: "~/myapp-directory"  # Директория на сервере
+
+      # Шаг 3: Подключение к серверу и деплой
       - name: SSH to Server and Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -21,15 +33,23 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Переходим в директорию проекта
+            # Переходим в директорию, куда скопировали файлы
             cd ~/myapp-directory
-      
-            # Сборка образа из указанной папки
-            sudo docker build -t myapp ./Sulpak.TestAssigment.PublicApi/
-      
-            # Остановка и удаление старого контейнера
+
+            # Проверяем наличие Dockerfile
+            if [ ! -f ./Sulpak.TestAssigment.PublicApi/Dockerfile ]; then
+              echo "Error: Dockerfile not found in Sulpak.TestAssigment.PublicApi!"
+              exit 1
+            fi
+
+            # Останавливаем и удаляем старый контейнер
             sudo docker stop myapp-container || true
             sudo docker rm myapp-container || true
-      
-            # Запуск нового контейнера
+
+            # Собираем новый Docker-образ
+            sudo docker build -t myapp ./Sulpak.TestAssigment.PublicApi/
+
+            # Запускаем новый контейнер
             sudo docker run -d --name myapp-container -p 8080:8080 -p 8081:8081 myapp
+
+            echo "Deployment completed successfully!"
