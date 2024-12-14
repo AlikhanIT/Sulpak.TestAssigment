@@ -39,6 +39,6 @@ jobs:
             sudo docker build -t myapp .
 
             echo "Running the new container..."
-            sudo docker run -d --name myapp-container -p 8080:8080 -p 8081:8081 myapp
+            sudo docker run -d --name myapp-container -p 8080:8080 -p 8081:8081 myapp --urls http://0.0.0.0:8080
 
             echo "Deployment completed successfully!"
