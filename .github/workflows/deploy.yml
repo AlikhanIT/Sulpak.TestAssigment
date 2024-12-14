@@ -14,13 +14,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Start SSH Agent and Add Key
-        run: |
-          eval "$(ssh-agent -s)"
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
-          chmod 600 key.pem
-          ssh-add key.pem <<< "${{ secrets.SSH_PASSPHRASE }}"
-
       - name: SSH to Server and Deploy
         uses: appleboy/ssh-action@master
         with:
